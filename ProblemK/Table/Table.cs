@@ -16,7 +16,7 @@ namespace ProblemK.Table
 		{
 			if (width > 26 || height > 26)
 				throw new ArgumentException("Не реализована обработка размера больше 26!");
-			
+			Clear();
 			for (int row = 0; row < height; row++)
 			{
 				var x = new Row();
