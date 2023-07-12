@@ -15,31 +15,31 @@ namespace ProblemK.Table.Datas
 		/// <summary>
 		/// В Data может быть только ссылка на другую ячейку или ссылка вместе с выражением которое содержит цифры, все остальное не валидно.
 		/// </summary>
-		public string Data;
-		public string Calculate(IExpressionSolver expressionSolver)
+		public string Data { get; set; }
+		public string Calculate(Table table, IExpressionSolver expressionSolver)
 		{
-			
+
 			try
 			{
-				if (CheckSelfreference(Data))
+				if (CheckSelfreference(table, Data))
 				{
 					return "#ССЫЛКАНАСЕБЯ";
 				}
 				if (Data.IndexOfAny(new char[] { '+', '-', '*', '/' }) == -1)
 				{
 					var pos = Cell.GetNumberFromChar(Data);
-					var cell = Program.Table.Rows[pos[0]].Cells[pos[1]];
-					return cell.GetCalculate();
+					var cell = table.Rows[pos[0]].Cells[pos[1]];
+					return cell.GetCalculate(table);
 				}
 				var data = Data;
-				var tmp = Data.Replace("+", ",").Replace("-", ",").Replace("*", ",").Replace("/", ",").Split(",");
+				var tmp = Data.Replace("+", ",").Replace("-", ",").Replace("*", ",").Replace("/", ",").Replace("=", "").Split(",");
 				foreach (var i in tmp)
 				{
 					try
 					{
 						var pos = Cell.GetNumberFromChar(i);
-						var cell = Program.Table.Rows[pos[0]].Cells[pos[1]];
-						data = data.Replace(i, cell.GetCalculate());
+						var cell = table.Rows[pos[0]].Cells[pos[1]];
+						data = data.Replace(i, cell.GetCalculate(table));
 					}
 					catch { }
 				}
@@ -50,25 +50,25 @@ namespace ProblemK.Table.Datas
 
 		public string GetString()
 		{
-			return Data;
+			return $"={Data}";
 		}
 		/// <summary>
 		/// Проверка на то, чтобы ячейки не ссылались друг на друга по типу A0 -> A1 - > A0, такого быть не должно.
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		private bool CheckSelfreference(string data)
+		private bool CheckSelfreference(Table table, string data)
 		{
-			var tmp = data.Replace("+", ",").Replace("-", ",").Replace("*", ",").Replace("/", ",").Split(",");
+			var tmp = data.Replace("+", ",").Replace("-", ",").Replace("*", ",").Replace("/", ",").Replace("=", "").Split(",");
 			foreach (var i in tmp)
 			{
 				try
 				{
 					var pos = Cell.GetNumberFromChar(i);
-					var cell = Program.Table.Rows[pos[0]].Cells[pos[1]];
-					if (cell.Data.GetString() == Data)
+					var cell = table.Rows[pos[0]].Cells[pos[1]];
+					if (cell.Data.GetString() == GetString())
 						return true;
-					return CheckSelfreference(cell.Data.GetString());
+					return CheckSelfreference(table, cell.Data.GetString());
 				}
 				catch { }
 			}

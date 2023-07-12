@@ -10,7 +10,7 @@ namespace ProblemK.Table.Datas
 	internal class DataString : IData
 	{
 		public string Data = string.Empty;
-		public string Calculate(IExpressionSolver expressionSolver = null)
+		public string Calculate(Table table, IExpressionSolver expressionSolver = null)
 		{
 			return Data;
 		}

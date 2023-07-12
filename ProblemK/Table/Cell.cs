@@ -31,9 +31,9 @@ namespace ProblemK.Table
 		{
 			return Data.GetString();
 		}
-		public string GetCalculate()
+		public string GetCalculate(Table table)
 		{
-			return Data.Calculate(ExpressionSolver);
+			return Data.Calculate(table, ExpressionSolver);
 		}
 		/// <summary>
 		/// Получение строки из числа, для удобного выбора ячейки.

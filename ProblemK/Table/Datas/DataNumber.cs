@@ -11,7 +11,7 @@ namespace ProblemK.Table.Datas
 	{
 		public string Data { get; set; }
 
-		public string Calculate(IExpressionSolver expressionSolver = null)
+		public string Calculate(Table table, IExpressionSolver expressionSolver = null)
 		{
 			if (int.TryParse(Data, out _))
 			{

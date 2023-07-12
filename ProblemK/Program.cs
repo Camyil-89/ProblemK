@@ -12,7 +12,14 @@ namespace ProblemK
 		public static Table.Table Table;
 		static void Main(string[] args)
 		{
-			Table = new TableManager().CreateTable(5, 5);
+			Tests.Tests.Test_1();
+			Console.WriteLine();
+			Console.WriteLine();
+			Tests.Tests.Test_2();
+			Console.WriteLine();
+			Console.WriteLine();
+
+			Table = new TableManager().Create();
 			UI.Initial();
 		}
 	}

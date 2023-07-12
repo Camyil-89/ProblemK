@@ -15,16 +15,16 @@ namespace ProblemK.Table
 		{
 			if (width > 26 || height > 26)
 				throw new ArgumentException("Не реализована обработка размера больше 26!");
+			ExpressionSolver = expressionSolver;
 			for (int row = 0; row < height; row++)
 			{
 				var x = new Row();
 				for (int cell = 0; cell < width; cell++)
 				{
-					x.Cells.Add(new Cell());
+					x.Cells.Add(new Cell() { ExpressionSolver = expressionSolver});
 				}
 				Rows.Add(x);
 			}
-			ExpressionSolver = expressionSolver;
 		}
 	}
 }
