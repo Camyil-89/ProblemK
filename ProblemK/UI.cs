@@ -11,6 +11,7 @@ namespace ProblemK
 	internal static class UI
 	{
 		private static PrintManager PrintManager = new PrintManager();
+		private static Table.Table Table = new TableManager().Create();
 		public static void Initial()
 		{
 			while (true)
@@ -33,11 +34,11 @@ namespace ProblemK
 					else if (input == "2")
 					{
 
-						PrintManager.Serialize(Program.Table);
+						PrintManager.Serialize(Table);
 					}
 					else if (input == "3")
 					{
-						PrintManager.PrintOnlyValue(Program.Table);
+						PrintManager.PrintOnlyValue(Table);
 					}
 					else if (input == "4")
 					{
@@ -61,9 +62,17 @@ namespace ProblemK
 			try
 			{
 				var pos = Cell.GetNumberFromChar(Console.ReadLine());
-				var cell = Program.Table.Rows[pos[0]].Cells[pos[1]];
+				var cell = Table.Rows[pos[0]].Cells[pos[1]];
 				Console.Write("Ввод:");
-				cell.Write(Console.ReadLine());
+				var res = Console.ReadLine();
+				try
+				{
+					cell.Write(res);
+				}
+				catch
+				{
+					Console.WriteLine($"Ошибка валидации!");
+				}
 			}
 			catch (Exception ex) { Console.WriteLine("Не удалось найти такую ячейку!"); }
 		}

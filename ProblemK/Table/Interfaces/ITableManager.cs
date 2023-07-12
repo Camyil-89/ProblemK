@@ -13,6 +13,6 @@ namespace ProblemK.Table.Interfaces
 	{
 		public Table Create();
 		public Table Create(int width, int height);
-		public Table Create(int width, int height, IExpressionSolver solver);
+		public Table Create(int width, int height, TableSettings settings);
 	}
 }

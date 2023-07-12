@@ -10,10 +10,23 @@ namespace ProblemK.Table
 {
 	internal class Cell
 	{
-		public IData Data { get; set; } = new DataString();
+		public IData Data { get; private set; } = new DataString();
 		public IExpressionSolver ExpressionSolver { get; set; }
+		public IValidate ValidateManager { get; set; }
+		public Cell(IExpressionSolver expressionSolver, IValidate validateManager)
+		{
+			ExpressionSolver = expressionSolver;
+			ValidateManager = validateManager;
+		}
+
 		public void Write(string str)
 		{
+			if (string.IsNullOrEmpty(str))
+				return;
+			if (ValidateManager != null && ValidateManager.Validate(str) == false)
+			{
+				throw new Exception("Ошибка валидации!");
+			}
 			if (str[0] == '\'')
 			{
 				Data = new DataString() { Data = string.Join("", str.Skip(1)) };

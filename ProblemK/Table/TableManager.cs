@@ -1,4 +1,5 @@
 ﻿using ProblemK.Table.Interfaces;
+using ProblemK.Table.Validates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,18 @@ namespace ProblemK.Table
 		/// <returns></returns>
 		public Table Create()
 		{
-			return new Table(5, 5, new ExpressionSolver());
+			return Create(5, 5);
 		}
 
 		public Table Create(int width, int height)
 		{
-			return new Table(width, height, new ExpressionSolver());
+			return Create(width, height, new TableSettings());
 		}
 
-		public Table Create(int width, int height, IExpressionSolver solver)
+
+		public Table Create(int width, int height, TableSettings settings)
 		{
-			return new Table(width, height, solver);
+			return new Table(width, height, settings);
 		}
 	}
 }

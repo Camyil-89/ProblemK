@@ -9,7 +9,6 @@ namespace ProblemK
 	/// </summary>
 	internal class Program
 	{
-		public static Table.Table Table;
 		static void Main(string[] args)
 		{
 			Tests.Tests.Test_1();
@@ -18,8 +17,9 @@ namespace ProblemK
 			Tests.Tests.Test_2();
 			Console.WriteLine();
 			Console.WriteLine();
-
-			Table = new TableManager().Create();
+			Tests.Tests.Test_3();
+			Console.WriteLine();
+			Console.WriteLine();
 			UI.Initial();
 		}
 	}

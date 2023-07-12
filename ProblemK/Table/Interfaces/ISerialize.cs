@@ -11,8 +11,10 @@ namespace ProblemK.Table.Interfaces
 	/// </summary>
 	internal interface ISerialize
 	{
-		public void Serialize(Table table);
-		public Table Deserialize(string path);
-		public Table Deserialize(Stream stream);
+		public string SerializeToText(Table table);
+		public Table DeserializeFromText(string text, TableSettings settings);
+		public void Serialize(Table table, string path);
+		public Table Deserialize(string path, TableSettings settings);
+		public Table Deserialize(Stream stream, TableSettings settings);
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using ProblemK.Table;
+using ProblemK.Table.Interfaces;
 using ProblemK.Table.Print;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace ProblemK.Tests
 		public static void Test_1()
 		{
 			Console.WriteLine("START TEST 1");
-			Table.Table table = new Table.Table(5, 5, new ExpressionSolver());
+			Table.Table table = new TableManager().Create();
 			PrintManager PrintManager = new PrintManager();
 			table.Rows[0].Cells[0].Write("=A1");
 			table.Rows[1].Cells[0].Write("=A2");
@@ -29,13 +30,37 @@ namespace ProblemK.Tests
 		public static void Test_2()
 		{
 			Console.WriteLine("START TEST 2");
-			Table.Table table = new Table.Table(5, 5, new ExpressionSolver());
+			Table.Table table = new TableManager().Create();
+			ISerialize serializer = new SerializerTXT();
 			PrintManager PrintManager = new PrintManager();
 			table.Rows[0].Cells[0].Write("=A1");
-			table.Rows[1].Cells[0].Write("=A0");
+			table.Rows[1].Cells[0].Write("=A2");
+			table.Rows[2].Cells[0].Write("=A0");
 
+			table.Rows[0].Cells[1].Write("12");
+			table.Rows[1].Cells[1].Write("=B0");
+			table.Rows[2].Cells[1].Write("=10+B1+B0");
+
+			serializer.Serialize(table, "test.txt");
+
+
+			table = serializer.Deserialize("test.txt", new TableSettings());
 			PrintManager.Serialize(table);
 			Console.WriteLine("END TEST 2");
+		}
+		public static void Test_3()
+		{
+			Console.WriteLine("START TEST 3");
+			Table.Table table = new TableManager().Create();
+			PrintManager PrintManager = new PrintManager();
+			table.Rows[0].Cells[0].Write("12"); // A0
+			table.Rows[1].Cells[0].Write("=A4"); // A1
+			table.Rows[2].Cells[0].Write("=A0+A1"); // A2
+			table.Rows[3].Cells[0].Write("=A2"); // A3
+			table.Rows[4].Cells[0].Write("=A2"); // A4
+
+			PrintManager.Serialize(table);
+			Console.WriteLine("END TEST 3");
 		}
 	}
 }

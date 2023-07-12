@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProblemK.Table.Print
 {
-	internal class PrintManager : ISerialize
+	internal class PrintManager
 	{
 		public void Serialize(Table table)
 		{
@@ -38,16 +38,6 @@ namespace ProblemK.Table.Print
 				}
 				Console.WriteLine();
 			}
-		}
-
-		public Table Deserialize(string path)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Table Deserialize(Stream stream)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

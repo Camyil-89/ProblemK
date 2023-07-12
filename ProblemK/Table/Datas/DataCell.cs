@@ -62,15 +62,17 @@ namespace ProblemK.Table.Datas
 			var tmp = data.Replace("+", ",").Replace("-", ",").Replace("*", ",").Replace("/", ",").Replace("=", "").Split(",");
 			foreach (var i in tmp)
 			{
+				Cell cell;
 				try
 				{
 					var pos = Cell.GetNumberFromChar(i);
-					var cell = table.Rows[pos[0]].Cells[pos[1]];
-					if (cell.Data.GetString() == GetString())
-						return true;
-					return CheckSelfreference(table, cell.Data.GetString());
+					cell = table.Rows[pos[0]].Cells[pos[1]];
 				}
-				catch { }
+				catch { continue; }
+				if (cell.Data.GetString() == GetString())
+					return true;
+				if (CheckSelfreference(table, cell.Data.GetString()))
+					return true;
 			}
 			return false;
 		}
