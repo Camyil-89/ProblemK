@@ -3,7 +3,7 @@
 Решение задачи (https://wiki.haskell.org/Ru/Problem_K).
 
 
-## вывод в консоль тестовых таблиц.
+## Вывод в консоль тестовых таблиц.
 ![image](https://github.com/Camyil-89/ProblemK/assets/76705837/3458c860-4b14-4822-808f-3ad87f63c3d1)
 
 ## 
