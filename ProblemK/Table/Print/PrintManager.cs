@@ -16,7 +16,7 @@ namespace ProblemK.Table.Print
 				for (int cell = 0; cell < table.Rows[row].Cells.Count; cell++)
 				{
 					var _cell = table.Rows[row].Cells[cell];
-					Console.Write($"{Cell.GetCharFromNumber(cell)}{row} ({_cell.GetWithoutCalculate()}) [{_cell.GetCalculate(table)}]\t");
+					Console.Write("{0,30}", $"{Cell.GetCharFromNumber(cell)}{row} ({_cell.GetWithoutCalculate()}) [{_cell.GetCalculate(table)}]\t");
 				}
 				Console.WriteLine();
 			}
