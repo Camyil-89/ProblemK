@@ -37,7 +37,7 @@ public IEnumerable<Row> GetFromTop(string path, int start, int count);
 
 ### IExpressionSolver
 Для реализации операций над строками необходимо будет создать новый класс наследуя интерфейс IExpressionSolver, в котором будет реализация работы со строками.
-```С#
+```C#
 internal interface IExpressionSolver
 	{
 		public string Calculate(string expression);
